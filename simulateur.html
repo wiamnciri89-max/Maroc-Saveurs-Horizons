@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulation Force Brute</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div style="text-align:right; margin-bottom: 10px;">
+        <span id="user" style="color:#58a6ff; margin-right: 15px;"></span>
+        <button class="danger" onclick="logout()">Se déconnecter</button>
+    </div>
+
+    <h2>📖 Présentation du simulateur</h2>
+
+    <div class="info">
+        <p>Ce simulateur reproduit une attaque par dictionnaire sur un mot de passe. L'objectif est de tester la robustesse d'un mot de passe en essayant une liste de mots courants jusqu'à trouver le bon.</p>
+        <p>Chaque tentative est affichée en temps réel avec un compteur et un journal des événements, permettant de visualiser le fonctionnement d'une attaque automatisée utilisée par les hackers.</p>
+        <p>Le système intègre plusieurs contre-mesures de sécurité : limitation du nombre de tentatives, temporisation et captcha. Ces protections permettent de ralentir ou bloquer l'attaque.</p>
+        <p>Ce projet montre l'importance d'utiliser des mots de passe forts et uniques pour se protéger contre les attaques de type brute force ou dictionnaire.</p>
+    </div>
+
+    <hr>
+
+    <h2>⚔️ Simulateur d'attaque</h2>
+
+    <input type="text" id="targetPassword" placeholder="Mot de passe cible" value="Azerty123!">
+
+    <br>
+
+    <button onclick="startAttack()">Démarrer</button>
+    <button onclick="stopAttack()">Stop</button>
+    <button onclick="resetAttack()">Reset</button>
+
+    <div class="stats">
+        <p>Status : <span id="status">Prêt</span></p>
+        <p>Tentative en cours : <span id="currentTry">-</span></p>
+        <p>Compteur : <span id="count">0</span></p>
+    </div>
+
+    <hr>
+
+    <h3>🛡️ Contre-mesures</h3>
+
+    <div class="security">
+        <label><input type="checkbox" id="limit"> Limite tentatives (10)</label>
+        <label><input type="checkbox" id="delay"> Temporisation (3 sec après 5 échecs)</label>
+        <label><input type="checkbox" id="captcha"> Captcha</label>
+    </div>
+
+    <hr>
+
+    <h3>📋 Journal</h3>
+    <textarea id="log" rows="10" readonly></textarea>
+    <br>
+    <button onclick="copyLog()">Copier log</button>
+
+</div>
+
+<!-- 🤖 Captcha intégré -->
+<div id="captchaBox" style="display:none;">
+    <div class="captcha-box">
+        <p id="captchaQuestion"></p>
+        <input type="number" id="captchaInput" placeholder="Ta réponse">
+        <button onclick="validateCaptcha()">Valider</button>
+        <p id="captchaError" style="color:#f85149;"></p>
+    </div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
